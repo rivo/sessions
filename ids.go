@@ -41,7 +41,7 @@ func initCUID() {
 // (Base62). They are generated from a 64-bit value with the following fields:
 //
 //     - Bit 64-25: A timestamp. The number of milliseconds since Jan 1, 2017,
-//       ommitting all bits above bit 40. Timestamps start over about every 34
+//       omitting all bits above bit 40. Timestamps start over about every 34
 //       years. Thus, within these time periods, user IDs should be sortable
 //       lexicographically.
 //     - Bit 24-9: A 16-bit hash of this computer's MAC address.

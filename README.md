@@ -1,6 +1,7 @@
 # Cookie-Based Web Sessions
 
 [![Godoc Reference](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/rivo/sessions)
+[![Go Report](https://img.shields.io/badge/go%20report-A%2B-brightgreen.svg)](https://goreportcard.com/report/github.com/rivo/sessions)
 
 This Go package attempts to free you from the hard work of implementing safe cookie-based web sessions.
 

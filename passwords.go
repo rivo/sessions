@@ -36,7 +36,7 @@ func initPasswords() {
 // password constants as a result (PasswordOK if no major issues were found).
 //
 // The tests performed by this function follow the NIST SP 800-63B guidelines
-// (section 5.1.1), with two modifications: The list of comprimised passwords
+// (section 5.1.1), with two modifications: The list of compromised passwords
 // has been shortened to the top 100,000 and we're using an english dictionary
 // only so far.
 func ReasonablePassword(password string, names []string) int {

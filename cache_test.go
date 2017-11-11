@@ -8,7 +8,7 @@ import (
 // Test basic cache functionality.
 func TestCache(t *testing.T) {
 	// A session ID set.
-	set := map[string]struct{}{"s3": struct{}{}, "s4": struct{}{}}
+	set := map[string]struct{}{"s3": {}, "s4": {}}
 
 	// Some reference counts.
 	var loaded, saved, deleted int

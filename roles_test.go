@@ -18,11 +18,11 @@ func TestRoleHierarchy(t *testing.T) {
 
 	// Expected result.
 	descendents := map[string][]string{
-		"A": []string{"B", "C", "D", "E", "F", "G"},
-		"B": []string{"E", "F"},
-		"D": []string{"G"},
-		"H": []string{"I", "J", "K"},
-		"J": []string{"K"},
+		"A": {"B", "C", "D", "E", "F", "G"},
+		"B": {"E", "F"},
+		"D": {"G"},
+		"H": {"I", "J", "K"},
+		"J": {"K"},
 	}
 
 	// Compare.

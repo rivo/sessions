@@ -17,7 +17,7 @@ type cache struct {
 // sessions is the global sessions cache.
 var sessions *cache
 
-// initCache initalizes the global sessions cache.
+// initCache initializes the global sessions cache.
 func initCache() {
 	sessions = &cache{
 		sessions: make(map[string]*Session),

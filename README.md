@@ -1,4 +1,4 @@
-# Cookie-Based Web Sessions
+# A Go Package for Cookie-Based Web Sessions
 
 [![Godoc Reference](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/rivo/sessions)
 [![Go Report](https://img.shields.io/badge/go%20report-A%2B-brightgreen.svg)](https://goreportcard.com/report/github.com/rivo/sessions)
@@ -24,7 +24,7 @@ Additional features:
 - It's not a framework, everything is based on net/http.
 - Extensive documentation
 
-If you want to go one step further and have user signup, login, logout, password reset, email/password change implemented for you, check out [rivo/users](http://github.com/rivo/users).
+If you want to go one step further and have user signup, login, logout, password reset, email/password change implemented for you, check out [github.com/rivo/users](http://github.com/rivo/users).
 
 ## Installation
 

@@ -76,7 +76,7 @@ Then there is `Persistence` used to connect to the session store of your choice 
 
 See http://godoc.org/github.com/rivo/sessions for the documentation.
 
-See also the Wiki for more examples and explanations.
+See also the [Wiki](https://github.com/rivo/sessions/wiki/) for more examples and explanations.
 
 ## Your Feedback
 

@@ -95,7 +95,7 @@ var (
 	// connect it via the persistence layer.
 	MaxSessionCacheSize = 1024 * 1024
 
-	// SessionCacheExpiry is the maximum duration a session will remain in the
-	// local cache.
+	// SessionCacheExpiry is the maximum duration an inactive session will remain
+	// in the local cache.
 	SessionCacheExpiry = time.Hour
 )

@@ -73,6 +73,8 @@ type PersistenceLayer interface {
 	// cron job to purge sessions that have expired. Use session.Expired() for
 	// this or, if you can access session data directly:
 	//
+	//   session.referenceID != "" &&
+	//   time.Since(session.lastAccess) >= SessionIDGracePeriod ||
 	//   time.Since(session.lastAccess) >= SessionExpiry &&
 	//   time.Since(session.created) >= SessionIDExpiry+SessionIDGracePeriod
 	DeleteSession(id string) error

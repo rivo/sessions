@@ -14,17 +14,17 @@ import (
 	"time"
 )
 
-// For 10 bytes (2^80) the collision probability at 1 billion sessions is
-// 0.0000004.
-// https://en.wikipedia.org/wiki/Birthday_problem
-// http://www.wolframalpha.com/input/?i=1-e%5E(-1000000000*(1000000000-1)%2F(2*2%5E80))
-// => 128 bits
-
-// Session ...
+// Session represents a browser session which may persist across multiple HTTP
+// requests. A session is usually generated with the Start() function and may
+// be destroyed with the Destroy() function.
 //
-// lastAccess is persisted only when purged from cache.
+// Sessions are uniquely identified by their session ID. This session ID is
+// regenerated, i.e. exchanged, regularly to prevent others from hijacking
+// sessions. This can be done explicitly with the RegenerateID() function. And
+// it happens automatically based on the rules defined in this package (see
+// package variables for details).
 //
-// The functions of this type are thread-safe.
+// The functions for this type are thread-safe.
 type Session struct {
 	sync.RWMutex
 	id                string                 // The session ID. Will not be saved with the session.
@@ -523,8 +523,16 @@ func (s *Session) UnmarshalJSON(data []byte) error {
 func (s *Session) Expired() bool {
 	s.RLock()
 	defer s.RUnlock()
-	return time.Since(s.lastAccess) >= SessionExpiry &&
-		time.Since(s.created) >= SessionIDExpiry+SessionIDGracePeriod
+	return s.referenceID != "" && time.Since(s.lastAccess) >= SessionIDGracePeriod ||
+		time.Since(s.lastAccess) >= SessionExpiry &&
+			time.Since(s.created) >= SessionIDExpiry+SessionIDGracePeriod
+}
+
+// LastAccess returns the time this session was last accessed.
+func (s *Session) LastAccess() time.Time {
+	s.RLock()
+	defer s.RUnlock()
+	return s.lastAccess
 }
 
 // User returns the user for this session or nil if no user is attached to it,

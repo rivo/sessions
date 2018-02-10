@@ -10,7 +10,7 @@ import (
 //
 // Member functions should not be called while sessions are locked.
 type cache struct {
-	sync.RWMutex
+	sync.Mutex
 	sessions map[string]*Session
 }
 
@@ -29,8 +29,8 @@ func initCache() {
 // such session exists, a nil session may be returned. This function does not
 // update the session's last access date.
 func (c *cache) Get(id string) (*Session, error) {
-	c.RLock()
-	defer c.RUnlock()
+	c.Lock()
+	defer c.Unlock()
 
 	// Do we have a cached session?
 	session, ok := c.sessions[id]
@@ -82,10 +82,8 @@ func (c *cache) Set(session *Session) error {
 	}
 
 	// Write through to database.
-	session.Lock()
-	defer session.Unlock()
 	if err := Persistence.SaveSession(id, session); err != nil {
-		return nil
+		return err
 	}
 
 	return nil

@@ -225,7 +225,7 @@ func Start(response http.ResponseWriter, request *http.Request, createIfNew bool
 // period (defined in SessionIDGracePeriod). When that reference session is
 // requested, the new session will be returned in its place.
 func (s *Session) RegenerateID(response http.ResponseWriter) error {
-	// Save current session under a new ID.
+	// Save this session under a new ID.
 	oldID := s.id
 	id, err := generateSesssionID()
 	if err != nil {
@@ -585,8 +585,8 @@ func (s *Session) LogIn(user User, exclusive bool, response http.ResponseWriter)
 // error from SaveSession().
 func (s *Session) Set(key string, value interface{}) error {
 	s.Lock()
-	defer s.Unlock()
 	s.data[key] = value
+	s.Unlock()
 	return Persistence.SaveSession(s.id, s)
 }
 
@@ -606,8 +606,8 @@ func (s *Session) Get(key string, def interface{}) interface{} {
 // the key is not contained, the default "def" is returned. The key is also
 // deleted from the session.
 func (s *Session) GetAndDelete(key string, def interface{}) interface{} {
-	s.RLock()
-	defer s.RUnlock()
+	s.Lock()
+	defer s.Unlock()
 	value, ok := s.data[key]
 	if ok {
 		delete(s.data, key)
@@ -621,8 +621,8 @@ func (s *Session) GetAndDelete(key string, def interface{}) interface{} {
 // persistence layer. The error returned is the error from SaveSession().
 func (s *Session) Delete(key string) error {
 	s.Lock()
-	defer s.Unlock()
 	delete(s.data, key)
+	s.Unlock()
 	return Persistence.SaveSession(s.id, s)
 }
 
@@ -634,15 +634,16 @@ func (s *Session) Delete(key string) error {
 // If no user is logged into this session, nothing happens.
 func (s *Session) LogOut() error {
 	s.Lock()
-	defer s.Unlock()
 
 	// Do we have a user at all?
 	if s.user == nil {
+		s.Unlock()
 		return nil
 	}
 
 	// Log user out of this session.
 	s.user = nil
+	s.Unlock()
 
 	return Persistence.SaveSession(s.id, s)
 }

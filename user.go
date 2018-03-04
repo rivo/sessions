@@ -4,7 +4,4 @@ package sessions
 type User interface {
 	// GetID returns the user's unique ID.
 	GetID() interface{}
-
-	// GetRoles returns the roles of this user.
-	GetRoles() []string
 }

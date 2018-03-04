@@ -89,13 +89,6 @@ type PersistenceLayer interface {
 	// LoadUser loads the user with the given unqiue user ID (typically the
 	// primary key) from the data store.
 	LoadUser(id interface{}) (User, error)
-
-	// RoleHierarchy loads and returns any roles which have parent roles. A parent
-	// role inherits the capabilities of all of its descendent roles. The returned
-	// map (which may be nil if there is no hierarchy) maps a role to its parent
-	// role. Roles without a parent role are not contained. This function is
-	// called only when SetupRoleHierarchy() is called.
-	RoleHierarchy() (map[string]string, error)
 }
 
 // ExtendablePersistenceLayer implements the PersistenceLayer interface by doing
@@ -109,7 +102,6 @@ type ExtendablePersistenceLayer struct {
 	SaveSessionFunc   func(id string, session *Session) error
 	DeleteSessionFunc func(id string) error
 	UserSessionsFunc  func(userID interface{}) ([]string, error)
-	RoleHierarchyFunc func() (map[string]string, error)
 	LoadUserFunc      func(id interface{}) (User, error)
 }
 
@@ -141,14 +133,6 @@ func (p ExtendablePersistenceLayer) DeleteSession(id string) error {
 func (p ExtendablePersistenceLayer) UserSessions(userID interface{}) ([]string, error) {
 	if p.UserSessionsFunc != nil {
 		return p.UserSessionsFunc(userID)
-	}
-	return nil, nil
-}
-
-// RoleHierarchy delegates to RoleHierarchyFunc or returns an empty map.
-func (p ExtendablePersistenceLayer) RoleHierarchy() (map[string]string, error) {
-	if p.RoleHierarchyFunc != nil {
-		return p.RoleHierarchyFunc()
 	}
 	return nil, nil
 }

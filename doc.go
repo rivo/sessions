@@ -14,7 +14,6 @@ In addition, the package provides the following functionality:
   - Log in/out functions for users
   - Various identifier generation functions
   - Password strength checks (based on NIST recommendations)
-  - Role-based access control (RBAC) functions (work in progress)
 
 While simple to use, the package offers a number of extensively documented
 configuration variables. It also does not assume specific backend technologies.
@@ -137,7 +136,5 @@ The RandomID() function generates random Base-62 strings of any length.
 
 The ReasonablePassword() function checks the strength of a password based on the
 recommendations of NIST SP 800-63B.
-
-User roles are currently work in progress.
 */
 package sessions

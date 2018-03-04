@@ -19,11 +19,6 @@ func (u *TestUser) GetID() interface{} {
 	return u.ID
 }
 
-// Return the user's roles.
-func (u *TestUser) GetRoles() []string {
-	return nil
-}
-
 // Test login.
 func TestUserLogin(t *testing.T) {
 	defer reset()

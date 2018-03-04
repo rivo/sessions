@@ -18,7 +18,6 @@ Additional features:
 - Log in/out functions for users
 - Various identifier generation functions
 - Password strength checks (based on NIST recommendations)
-- Role-based access control (RBAC) functions (work in progress)
 - Lots of configuration options
 - Database-agnostic, choose your own backend
 - It's not a framework, everything is based on net/http.

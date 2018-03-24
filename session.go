@@ -536,7 +536,9 @@ func (s *Session) LastAccess() time.Time {
 }
 
 // User returns the user for this session or nil if no user is attached to it,
-// i.e. if the user is logged out.
+// i.e. if the user is logged out. When checking for nil, it is not enough to
+// just check for a nil (User) interface. You may also need to cast the
+// interface to your own user type and check if it is nil.
 func (s *Session) User() User {
 	s.RLock()
 	defer s.RUnlock()

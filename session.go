@@ -683,6 +683,11 @@ func LogOut(userID interface{}) error {
 // object. This requires that Persistence.UserSessions() be implemented,
 // returning all IDs of sessions that contain this user.
 //
+// Calling this function is not necessary if you don't use the local cache (i.e.
+// MaxSessionCacheSize is 0) and if serialized session objects only contain the
+// user ID (as it is with the provided default serlization functions GobEncode()
+// and MarshalJSON()).
+//
 // Note that this call will fail if the user ID itself was changed. Such a
 // change is more difficult and is not covered here.
 func RefreshUser(user User) error {

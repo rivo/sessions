@@ -190,7 +190,7 @@ func Start(response http.ResponseWriter, request *http.Request, createIfNew bool
 		}
 
 		// Create a new session for this user.
-		id, err = generateSesssionID()
+		id, err = generateSessionID()
 		if err != nil {
 			return nil, fmt.Errorf("Could not generate new session ID: %s", err)
 		}
@@ -227,7 +227,7 @@ func Start(response http.ResponseWriter, request *http.Request, createIfNew bool
 func (s *Session) RegenerateID(response http.ResponseWriter) error {
 	// Save this session under a new ID.
 	oldID := s.id
-	id, err := generateSesssionID()
+	id, err := generateSessionID()
 	if err != nil {
 		return fmt.Errorf("Could not generate replacement session ID: %s", err)
 	}

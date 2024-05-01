@@ -117,10 +117,10 @@ func RandomID(length int) (string, error) {
 	return string(id), nil
 }
 
-// generateSesssionID generates a random 128-bit, Base64-encoded session ID.
+// generateSessionID generates a random 128-bit, Base64-encoded session ID.
 // Collision probability is close to zero. The resulting string is 24 characters
 // long.
-func generateSesssionID() (string, error) {
+func generateSessionID() (string, error) {
 	// For more on collisions:
 	// https://en.wikipedia.org/wiki/Birthday_problem
 	// http://www.wolframalpha.com/input/?i=1-e%5E(-1000000000*(1000000000-1)%2F(2*2%5E128))
